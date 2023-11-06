@@ -7,27 +7,33 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
 
-    private float movementX = 0;
-    private float movementY = 0;
+    private Vector2 movement;
 
     Rigidbody2D rb;
     List<RaycastHit2D> hits = new List<RaycastHit2D>();
     public ContactFilter2D contactFilter;
+    Animator playerAnim;
 
     [SerializeField] GameObject bullet;
     void Start()
     {
         transform.position = Vector3.zero;
-        rb = GetComponent<Rigidbody2D>();  
+        rb = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        int count = rb.Cast(new Vector2(movementX, movementY), contactFilter, hits, speed * Time.deltaTime);
-        if (count == 0)
+        int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
+        if (count == 0 && movement != Vector2.zero) 
         {
-            transform.position += speed * Time.deltaTime * (new Vector3(movementX, movementY, 0));
-        } 
+            transform.position += speed * Time.deltaTime * new Vector3(movement.x, movement.y, 0) ;
+            playerAnim.SetBool("isRunning", true);
+        }
+        else
+        {
+            playerAnim.SetBool("isRunning", false);
+        }
     }
 
     // Update is called once per frame
@@ -39,8 +45,7 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         Vector2 movementVector = value.Get<Vector2>().normalized;
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        movement = new Vector2(movementVector.x, movementVector.y);
     }
 
     void OnFire(InputValue value)
