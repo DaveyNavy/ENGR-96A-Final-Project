@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     Animator playerAnim;
     SpriteRenderer spriteRenderer;
 
+    private float fireCooldownStart = -3;
+
     [SerializeField] GameObject bullet;
     void Start()
     {
@@ -60,6 +62,12 @@ public class PlayerController : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        Instantiate(bullet, transform.position, transform.rotation);
+        if (Time.time - fireCooldownStart > 1)
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+            playerAnim.SetTrigger("fire");
+            fireCooldownStart = Time.time;
+        }
+
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class BulletScript : MonoBehaviour
 {
-    int speed = 10;
+    int speed = 5;
     Rigidbody2D rb;
     void Start()
     {
@@ -16,5 +16,13 @@ public class BulletScript : MonoBehaviour
         Vector2 direction = (Vector2)((offset - transform.position));
         direction.Normalize();
         rb.velocity = direction * speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+
+        }
     }
 }
