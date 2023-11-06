@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     List<RaycastHit2D> hits = new List<RaycastHit2D>();
     public ContactFilter2D contactFilter;
     Animator playerAnim;
+    SpriteRenderer spriteRenderer;
 
     [SerializeField] GameObject bullet;
     void Start()
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.zero;
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -33,6 +35,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerAnim.SetBool("isRunning", false);
+        }
+
+        if (movement.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        } else
+        {
+            spriteRenderer.flipX= false;
         }
     }
 
