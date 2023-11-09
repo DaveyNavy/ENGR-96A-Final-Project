@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     private float fireCooldownStart = -3;
+    int ammo = 0;
+    public TextMeshProUGUI ammoText;
 
     [SerializeField] GameObject bullet;
     void Start()
@@ -28,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SetAmmoText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
         if (count == 0 && movement != Vector2.zero) 
         {
@@ -62,12 +67,17 @@ public class PlayerController : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        if (Time.time - fireCooldownStart > 1)
+        if (Time.time - fireCooldownStart > 1 && ammo > 0)
         {
             Instantiate(bullet, transform.position, transform.rotation);
             playerAnim.SetTrigger("fire");
             fireCooldownStart = Time.time;
+            ammo--;
         }
+    }
 
+    void SetAmmoText()
+    {
+        ammoText.text = "Ammo: " + ammo.ToString();
     }
 }
