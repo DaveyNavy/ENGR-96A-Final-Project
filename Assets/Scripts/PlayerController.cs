@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bullet;
     void Start()
     {
-        transform.position = Vector3.zero;
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(transform.position.x + " " + transform.position.y);
         SetAmmoText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
         if (count == 0 && movement != Vector2.zero) 
@@ -51,12 +51,6 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnMove(InputValue value)

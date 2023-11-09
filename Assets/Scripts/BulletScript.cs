@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class BulletScript : MonoBehaviour
 {
     int speed = 5;
+    int damage = 3;
     Rigidbody2D rb;
     void Start()
     {
@@ -22,7 +23,12 @@ public class BulletScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            Enemy enemy = collision.GetComponent<Enemy>();
 
+            if (enemy != null)
+            {
+                enemy.takeDamage(damage);
+            }
         }
     }
 }
