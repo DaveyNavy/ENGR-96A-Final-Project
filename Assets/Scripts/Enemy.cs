@@ -6,10 +6,14 @@ public class Enemy : MonoBehaviour
 {
 
     public float health = 5;
+    SpriteRenderer spriteRenderer;
+    Animator enemyAnim;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        enemyAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -17,17 +21,25 @@ public class Enemy : MonoBehaviour
     {
         if (health <= 0)
         {
-            die();
+            enemyAnim.SetTrigger("die");
+            Destroy(gameObject);
+        }
+        else
+        {
+            transform.position += new Vector3(0.005f * Mathf.Sin(Time.time), 0, 0);
+            if (Mathf.Sin(Time.time) < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (Mathf.Sin(Time.time) > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
 
     public void takeDamage(float damage)
     {
         health -= damage;
-    }
-
-    public void die ()
-    {
-        Destroy(gameObject);
     }
 }
