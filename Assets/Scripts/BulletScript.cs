@@ -28,6 +28,7 @@ public class BulletScript : MonoBehaviour
             if (enemy != null)
             {
                 enemy.takeDamage(damage);
+                Destroy(gameObject);
             }
         }
     }

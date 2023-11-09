@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     private float fireCooldownStart = -3;
-    int ammo = 0;
+    int ammo = 10;
     public TextMeshProUGUI ammoText;
 
     [SerializeField] GameObject bullet;
@@ -61,10 +61,11 @@ public class PlayerController : MonoBehaviour
 
     void OnFire(InputValue value)
     {
+
         if (Time.time - fireCooldownStart > 1 && ammo > 0)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
             playerAnim.SetTrigger("fire");
+            Instantiate(bullet, transform.position, transform.rotation);
             fireCooldownStart = Time.time;
             ammo--;
         }
