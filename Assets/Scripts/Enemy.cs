@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     public float health = 5;
-    float speed = 0.003f;
+    float speed = 0.002f;
     int aggroRange = 2;
 
     SpriteRenderer spriteRenderer;
@@ -31,9 +31,8 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             enemyAnim.SetTrigger("die");
-            Destroy(gameObject);
         }
-        if (Vector2.Distance(transform.position, player.transform.position) < aggroRange)
+        else if (Vector2.Distance(transform.position, player.transform.position) < aggroRange)
         {
             moveToPlayer();
         }
@@ -43,15 +42,12 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
     }
-
  
     private void moveToPlayer()
     {
         
         Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
         int count = rb.Cast(movementVector, contactFilter, hits, speed * movementVector.magnitude);
-        Debug.Log(speed * Time.deltaTime);
-        Debug.DrawRay(transform.position, movementVector * speed * 20, Color.black, 0.5f, false);
         if (count == 0) { transform.position += speed * movementVector; }
 
         if (movementVector.x > 0)
@@ -61,5 +57,10 @@ public class Enemy : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+    }
+
+    void die()
+    {
+        Destroy(gameObject);
     }
 }

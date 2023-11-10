@@ -6,20 +6,22 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0;
+    int health = 100;
+    public TextMeshProUGUI healthText;
 
+    public float speed = 0;
     private Vector2 movement;
 
     Rigidbody2D rb;
     List<RaycastHit2D> hits = new List<RaycastHit2D>();
     public ContactFilter2D contactFilter;
+
     Animator playerAnim;
     SpriteRenderer spriteRenderer;
 
     private float fireCooldownStart = -3;
     int ammo = 10;
     public TextMeshProUGUI ammoText;
-
     [SerializeField] GameObject bullet;
     void Start()
     {
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         SetAmmoText();
+        SetHealthText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
         if (count == 0 && movement != Vector2.zero) 
         {
@@ -48,6 +51,15 @@ public class PlayerController : MonoBehaviour
         } else if (movement.x > 0)
         {
             spriteRenderer.flipX = false;
+        }
+    }
+
+    private void OnCollisionEnter2D (Collision2D collision)
+    {
+        Debug.Log("COllide");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            takeDamage(2);
         }
     }
 
@@ -72,5 +84,15 @@ public class PlayerController : MonoBehaviour
     void SetAmmoText()
     {
         ammoText.text = "Ammo: " + ammo.ToString();
+    }
+
+    void SetHealthText()
+    {
+        healthText.text = "Health: " + health.ToString();
+    }
+
+    void takeDamage(int damage)
+    {
+        health -= damage;
     }
 }
