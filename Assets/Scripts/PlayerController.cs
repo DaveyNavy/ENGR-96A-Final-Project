@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(transform.position.x + " " + transform.position.y);
         SetAmmoText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
         if (count == 0 && movement != Vector2.zero) 
