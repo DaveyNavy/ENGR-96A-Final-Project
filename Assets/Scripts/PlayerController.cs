@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+
         SetAmmoText();
         SetHealthText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
@@ -54,10 +60,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D (Collision2D collision)
+    private void OnTriggerStay2D (Collider2D collider)
     {
-        Debug.Log("COllide");
-        if (collision.gameObject.tag == "Enemy")
+        if (collider.CompareTag("Enemy"))
         {
             takeDamage(2);
         }
