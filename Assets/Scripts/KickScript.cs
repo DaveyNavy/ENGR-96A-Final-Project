@@ -29,7 +29,7 @@ public class KickScript : MonoBehaviour
             Enemy enemy = hitCollider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.takeDamage(damage);
+                enemy.TakeDamage(damage);
             }
         }
         playerController.kickOn = false;

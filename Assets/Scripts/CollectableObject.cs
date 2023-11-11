@@ -8,7 +8,7 @@ public class CollectableObject : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     void Start()
     {
-        spriteRenderer.sprite = collectable.sprite;
+        ReloadSprite();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -17,5 +17,16 @@ public class CollectableObject : MonoBehaviour
             collectable.OnCollect();
             Destroy(gameObject);
         }
+    }
+
+    public void SetCollectable(Collectable c)
+    {
+        collectable = c;
+        ReloadSprite();
+    } 
+
+    private void ReloadSprite()
+    {
+        spriteRenderer.sprite = collectable.sprite;
     }
 }
