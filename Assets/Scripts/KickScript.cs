@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KickScript : MonoBehaviour
 {
-    public float kickRadius = 1.0f;
+    public float kickRadius = 0.07f;
     PlayerController playerController;
     int damage = 1;
 
