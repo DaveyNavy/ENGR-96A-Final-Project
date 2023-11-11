@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     int ammo = 10;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
+
+    public bool kickOn = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,9 +38,9 @@ public class PlayerController : MonoBehaviour
         SetAmmoText();
         SetHealthText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
-        if (count == 0 && movement != Vector2.zero) 
+        if (count == 0 && movement != Vector2.zero)
         {
-            transform.position += speed * Time.deltaTime * new Vector3(movement.x, movement.y, 0) ;
+            transform.position += speed * Time.deltaTime * new Vector3(movement.x, movement.y, 0);
             playerAnim.SetBool("isRunning", true);
         }
         else
@@ -48,13 +51,14 @@ public class PlayerController : MonoBehaviour
         if (movement.x < 0)
         {
             spriteRenderer.flipX = true;
-        } else if (movement.x > 0)
+        }
+        else if (movement.x > 0)
         {
             spriteRenderer.flipX = false;
         }
     }
 
-    private void OnCollisionEnter2D (Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("COllide");
         if (collision.gameObject.tag == "Enemy")
@@ -94,5 +98,12 @@ public class PlayerController : MonoBehaviour
     void takeDamage(int damage)
     {
         health -= damage;
+
+    }
+
+    void OnKick(InputValue value)
+    {
+        playerAnim.SetTrigger("kick");
+        kickOn = true;
     }
 }
