@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     int health = 100;
     public TextMeshProUGUI healthText;
+    float iFramesStart = 0;
 
     public float speed = 0;
     private Vector2 movement;
@@ -23,6 +25,9 @@ public class PlayerController : MonoBehaviour
     int ammo = 10;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
+
+    public bool kickOn = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,12 +37,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+
         SetAmmoText();
         SetHealthText();
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
-        if (count == 0 && movement != Vector2.zero) 
+        if (count == 0 && movement != Vector2.zero)
         {
-            transform.position += speed * Time.deltaTime * new Vector3(movement.x, movement.y, 0) ;
+            transform.position += speed * Time.deltaTime * new Vector3(movement.x, movement.y, 0);
             playerAnim.SetBool("isRunning", true);
         }
         else
@@ -48,18 +58,23 @@ public class PlayerController : MonoBehaviour
         if (movement.x < 0)
         {
             spriteRenderer.flipX = true;
-        } else if (movement.x > 0)
+        }
+        else if (movement.x > 0)
         {
             spriteRenderer.flipX = false;
         }
     }
 
-    private void OnCollisionEnter2D (Collision2D collision)
+    private void OnTriggerStay2D (Collider2D collider)
     {
-        Debug.Log("COllide");
-        if (collision.gameObject.tag == "Enemy")
+        if (collider.CompareTag("Enemy") && Time.time  - iFramesStart > 0.5f)
         {
-            takeDamage(2);
+            if (collider.GetComponent<Enemy>())
+            {
+                Enemy enemy = (Enemy) collider.GetComponent<Enemy>();
+                takeDamage(enemy.getDamage());
+                iFramesStart = Time.time;
+            }           
         }
     }
 
@@ -94,5 +109,12 @@ public class PlayerController : MonoBehaviour
     void takeDamage(int damage)
     {
         health -= damage;
+
+    }
+
+    void OnKick(InputValue value)
+    {
+        playerAnim.SetTrigger("kick");
+        kickOn = true;
     }
 }
