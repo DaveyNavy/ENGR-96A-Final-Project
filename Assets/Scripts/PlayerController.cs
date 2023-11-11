@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     int health = 100;
     public TextMeshProUGUI healthText;
+    float iFramesStart = 0;
 
     public float speed = 0;
     private Vector2 movement;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     int ammo = 10;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -62,9 +65,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D (Collider2D collider)
     {
-        if (collider.CompareTag("Enemy"))
+        if (collider.CompareTag("Enemy") && Time.time  - iFramesStart > 0.5f)
         {
-            takeDamage(2);
+            if (collider.GetComponent<Enemy>())
+            {
+                Enemy enemy = (Enemy) collider.GetComponent<Enemy>();
+                takeDamage(enemy.getDamage());
+                iFramesStart = Time.time;
+            }           
         }
     }
 
