@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     private float fireCooldownStart = -3;
-    int ammo = 10;
+    int ammo = 0;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
 

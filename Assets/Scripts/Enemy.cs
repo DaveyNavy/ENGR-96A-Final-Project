@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (bigSlime)
         {
-            health = 50;
+            health = 25;
             damageDealt = 5;
             aggroRange = 1;
             speed = 0.0025f;

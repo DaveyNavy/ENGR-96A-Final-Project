@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0191281ac964d3f4faf44df574fb40ae, type: 3}
   m_Name: Reload10
   m_EditorClassIdentifier: 
-  sprite: {fileID: 798830435, guid: 516e55b1da6bca54ebbaac415f205c59, type: 3}
+  sprite: {fileID: -332330028, guid: 516e55b1da6bca54ebbaac415f205c59, type: 3}
   name: reload_10
   reloadAmount: 10
