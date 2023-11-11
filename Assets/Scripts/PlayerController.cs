@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
     int health = 100;
     public TextMeshProUGUI healthText;
     float iFramesStart = 0;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     private float fireCooldownStart = -3;
-    int ammo = 10;
+    int ammo = 0;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
 
@@ -33,6 +34,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    
+    private void Awake() 
+    {
+        if (Instance != null && Instance != this) 
+        {
+            Destroy(this);
+        }
+
+        else 
+        {
+            Instance = this;
+        }
     }
 
     private void FixedUpdate()
@@ -72,7 +86,7 @@ public class PlayerController : MonoBehaviour
             if (collider.GetComponent<Enemy>())
             {
                 Enemy enemy = (Enemy) collider.GetComponent<Enemy>();
-                takeDamage(enemy.getDamage());
+                TakeDamage(enemy.GetDamage());
                 iFramesStart = Time.time;
             }           
         }
@@ -106,7 +120,7 @@ public class PlayerController : MonoBehaviour
         healthText.text = "Health: " + health.ToString();
     }
 
-    void takeDamage(int damage)
+    void TakeDamage(int damage)
     {
         health -= damage;
 
@@ -116,5 +130,11 @@ public class PlayerController : MonoBehaviour
     {
         playerAnim.SetTrigger("kick");
         kickOn = true;
+    }
+
+    public void ReloadAmmo(int reloadAmount)
+    {
+        ammo += reloadAmount;
+        SetAmmoText();
     }
 }
