@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     Animator enemyAnim;
     [SerializeField] GameObject player;
     [SerializeField] bool bigSlime;
+    [SerializeField] private List<Collectable> loot;
+    [SerializeField] private GameObject collectablePrefab;
     Rigidbody2D rb;
     List<RaycastHit2D> hits = new List<RaycastHit2D>();
     public ContactFilter2D contactFilter;
@@ -40,20 +42,20 @@ public class Enemy : MonoBehaviour
     {
         if (health <= 0)
         {
-            enemyAnim.SetTrigger("die");
+            enemyAnim.SetTrigger("Die");
         }
         else if (Vector2.Distance(transform.position, player.transform.position) < aggroRange)
         {
-            moveToPlayer();
+            MoveToPlayer();
         }
     }
 
-    public void takeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
     }
  
-    private void moveToPlayer()
+    private void MoveToPlayer()
     {
         
         Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
@@ -69,13 +71,24 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void die()
+    void Die()
     {
+        DropLoot();
         Destroy(gameObject);
     }
 
-    public int getDamage()
+    public int GetDamage()
     {
         return damageDealt;
+    }
+
+    void DropLoot()
+    {
+        Debug.Log("Dropping Loot.\n");
+        foreach (Collectable c in loot) 
+        {
+            CollectableObject collectableObject = Instantiate(collectablePrefab, transform.position, transform.rotation).GetComponent<CollectableObject>();
+            collectableObject.SetCollectable(c);
+        }
     }
 }
