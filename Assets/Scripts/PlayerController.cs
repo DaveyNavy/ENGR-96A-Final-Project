@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
         if (count == 0 && movement != Vector2.zero)
         {
-            transform.position += speed * Time.deltaTime * new Vector3(movement.x, movement.y, 0);
+            rb.position += speed * Time.deltaTime * movement;
             playerAnim.SetBool("isRunning", true);
         }
         else
@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
                 Enemy enemy = (Enemy) collider.GetComponent<Enemy>();
                 TakeDamage(enemy.GetDamage());
                 iFramesStart = Time.time;
+                AudioManager.instance.PlaySFX("Damage");
             }           
         }
     }
