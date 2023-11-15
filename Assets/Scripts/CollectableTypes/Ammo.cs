@@ -10,7 +10,6 @@ public class Ammo : Collectable
 
     public override void OnCollect()
     {
-        AudioManager.instance.PlaySFX("Collect");
         base.OnCollect();
         Debug.Log($"Collected {reloadAmount} more bullets.\n");
 
