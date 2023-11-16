@@ -10,6 +10,8 @@ public class BulletScript : MonoBehaviour
     int speed = 5;
     int damage = 3;
     Rigidbody2D rb;
+    Vector2 initialPosition;
+    [SerializeField] private float range = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,6 +19,7 @@ public class BulletScript : MonoBehaviour
         Vector2 direction = (Vector2)((offset - transform.position));
         direction.Normalize();
         rb.velocity = direction * speed;
+        initialPosition = rb.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +32,14 @@ public class BulletScript : MonoBehaviour
                 enemy.TakeDamage(damage);
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void Update()
+    {
+        if ((rb.position - initialPosition).magnitude > range)
+        {
+            Destroy(gameObject);
         }
     }
 }
