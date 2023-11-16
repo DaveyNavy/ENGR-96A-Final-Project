@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
 
     public float health = 5;
-    float speed = 0.003f;
+    float speed = 0.6f;
     int aggroRange = 2;
     int damageDealt = 2;
 
@@ -59,8 +59,8 @@ public class Enemy : MonoBehaviour
     {
         
         Vector3 movementVector = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
-        int count = rb.Cast(movementVector, contactFilter, hits, speed * movementVector.magnitude);
-        if (count == 0  || bigSlime) { transform.position += speed * movementVector; }
+        int count = rb.Cast(movementVector, contactFilter, hits, speed * movementVector.magnitude * Time.deltaTime);
+        if (count == 0  || bigSlime) { transform.position += speed * movementVector * Time.deltaTime; }
 
         if (movementVector.x > 0)
         {
