@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
     int ammo = 0;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
-
     public bool kickOn = false;
+    [SerializeField] private int maxHealth = 100;
 
     void Start()
     {
@@ -138,4 +138,25 @@ public class PlayerController : MonoBehaviour
         ammo += reloadAmount;
         SetAmmoText();
     }
+
+    public void RestoreHealth(int restoreAmount)
+    {
+        if (health >= maxHealth)
+        {
+            Debug.Log("Health full already; did not heal.\n");
+        }
+
+        else if (health + restoreAmount > maxHealth)
+        {
+            health = maxHealth;
+            Debug.Log("Health set to max.\n");
+        }
+
+        else 
+        {
+            health += restoreAmount;
+        }
+        
+        SetHealthText();
+    } 
 }
