@@ -8,6 +8,7 @@ public class Collectable : ScriptableObject {
     public new string name;
     public virtual void OnCollect() 
     {
+        AudioManager.instance.PlaySFX("Collect");
         Debug.Log($"Collected {name}.\n");
     }
 }
