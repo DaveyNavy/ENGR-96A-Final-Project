@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     public float health = 5;
     float speed = 0.6f;
-    float aggroRange = 2;
+    int aggroRange = 2;
     int damageDealt = 2;
 
     SpriteRenderer spriteRenderer;
@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
         {
             health = 25;
             damageDealt = 5;
-            aggroRange = 2.5f;
-            speed = 1.05f;
+            aggroRange = 1;
+            speed = 0.0025f;
         }
     }
 
