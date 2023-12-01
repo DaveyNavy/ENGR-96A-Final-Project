@@ -14,8 +14,12 @@ public class CollectableObject : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") 
         {
+            var inventory = other.transform.GetComponent<InventoryHolder>();
+            if (inventory.InventorySystem.AddToInventory(collectable, 1))
+            {
+                Destroy(gameObject);
+            }
             collectable.OnCollect();
-            Destroy(gameObject);
         }
     }
 
