@@ -26,8 +26,11 @@ public class PlayerController : MonoBehaviour
     int ammo = 0;
     public TextMeshProUGUI ammoText;
     [SerializeField] GameObject bullet;
-
     public bool kickOn = false;
+    [SerializeField] private int maxHealth = 100;
+    private float speedMultiplier = 1;
+    private float speedUpInitialTime = 0;
+    private float speedUpTimeLimit = 0;
 
     void Start()
     {
@@ -58,10 +61,16 @@ public class PlayerController : MonoBehaviour
 
         SetAmmoText();
         SetHealthText();
+
+        if (Time.fixedTime - speedUpInitialTime >= speedUpTimeLimit)
+        {
+            speedMultiplier = 1;
+        }
+
         int count = rb.Cast(movement, contactFilter, hits, speed * Time.deltaTime);
         if (count == 0 && movement != Vector2.zero)
         {
-            rb.position += speed * Time.deltaTime * movement;
+            rb.position += speed * speedMultiplier * Time.deltaTime * movement;
             playerAnim.SetBool("isRunning", true);
         }
         else
@@ -137,5 +146,33 @@ public class PlayerController : MonoBehaviour
     {
         ammo += reloadAmount;
         SetAmmoText();
+    }
+
+    public void RestoreHealth(int restoreAmount)
+    {
+        if (health >= maxHealth)
+        {
+            Debug.Log("Health full already; did not heal.\n");
+        }
+
+        else if (health + restoreAmount > maxHealth)
+        {
+            health = maxHealth;
+            Debug.Log("Health set to max.\n");
+        }
+
+        else 
+        {
+            health += restoreAmount;
+        }
+
+        SetHealthText();
+    }
+
+    public void SetSpeedMultiplier(float newMultiplier, float timeLimit)
+    {
+        speedMultiplier = newMultiplier;
+        speedUpInitialTime = Time.fixedTime;
+        speedUpTimeLimit = timeLimit;
     }
 }
