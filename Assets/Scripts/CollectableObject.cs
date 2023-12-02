@@ -11,9 +11,15 @@ public class CollectableObject : MonoBehaviour
         ReloadSprite();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player") 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
         {
+            var inventory = other.transform.GetComponent<InventoryHolder>();
+            if (inventory.InventorySystem.AddToInventory(collectable, 1))
+            {
+                Destroy(gameObject);
+            }
             collectable.OnCollect();
             Destroy(gameObject);
         }
@@ -23,7 +29,7 @@ public class CollectableObject : MonoBehaviour
     {
         collectable = c;
         ReloadSprite();
-    } 
+    }
 
     private void ReloadSprite()
     {
