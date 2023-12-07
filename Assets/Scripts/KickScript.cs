@@ -31,6 +31,12 @@ public class KickScript : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
+
+            SkullWolf wolf = hitCollider.GetComponent<SkullWolf>();
+            if (wolf != null)
+            {   
+                wolf.TakeDamage(damage);
+            }
         }
         playerController.kickOn = false;
     }

@@ -98,7 +98,14 @@ public class PlayerController : MonoBehaviour
                 TakeDamage(enemy.GetDamage());
                 iFramesStart = Time.time;
                 AudioManager.instance.PlaySFX("Damage");
-            }           
+            }
+            else if (collider.GetComponent<SkullWolf>())
+            {   
+                SkullWolf enemy = (SkullWolf) collider.GetComponent<SkullWolf>();
+                TakeDamage(enemy.GetDamage());
+                iFramesStart = Time.time;
+                AudioManager.instance.PlaySFX("Damage");
+            }            
         }
     }
 

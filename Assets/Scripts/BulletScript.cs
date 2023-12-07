@@ -32,6 +32,13 @@ public class BulletScript : MonoBehaviour
                 enemy.TakeDamage(damage);
                 Destroy(gameObject);
             }
+
+            SkullWolf wolf = collision.GetComponent<SkullWolf>();
+            if (wolf != null)
+            {   
+                wolf.TakeDamage(damage);
+                Destroy(gameObject);
+            }
         }
     }
 
