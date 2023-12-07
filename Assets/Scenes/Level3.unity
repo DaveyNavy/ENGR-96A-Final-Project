@@ -57893,7 +57893,7 @@ MonoBehaviour:
   health: 5
   player: {fileID: 526969174}
   loot:
-  - {fileID: 11400000, guid: c2ffacbd316d84247863e2490dd0a430, type: 2}
+  - {fileID: 11400000, guid: 9e6c6f16e35c1c845bc298d48dbd51fa, type: 2}
   collectablePrefab: {fileID: 8091677666212136361, guid: 9392d5d1173464049867067b29a21b7c, type: 3}
   contactFilter:
     useTriggers: 0
