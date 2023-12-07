@@ -10,9 +10,13 @@ public class Health : Collectable
 
     public override void OnCollect()
     {
+        AudioManager.instance.PlaySFX("Collect");
         base.OnCollect();
-        Debug.Log($"Healed for {healAmount} health.\n");
+    }
 
+    public override void OnExecute()
+    {
+        Debug.Log($"Healed for {healAmount} health.\n");
         PlayerController.Instance.RestoreHealth(healAmount);
     }
 }

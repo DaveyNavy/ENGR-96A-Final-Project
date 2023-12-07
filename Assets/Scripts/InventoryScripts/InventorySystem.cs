@@ -26,12 +26,9 @@ public class InventorySystem
     {
         if (ContainsItem(itemToAdd, out InventorySlot invSlot))
         {
-            if (invSlot.RoomLeftInStack(amt))
-            {
-                invSlot.AddToStack(amt);
-                OnInventorySlotChanged?.Invoke(invSlot);
-                return true;
-            }
+            invSlot.AddToStack(amt);
+            OnInventorySlotChanged?.Invoke(invSlot);
+            return true;
         }
         else if (HasFreeSlot(out InventorySlot freeSlot))
         {

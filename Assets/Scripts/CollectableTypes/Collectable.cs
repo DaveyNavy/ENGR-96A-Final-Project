@@ -8,7 +8,6 @@ public class Collectable : ScriptableObject
 {
     public Sprite sprite;
     public new string name;
-    public string type;
     public int maxStackSize = 999999;
 
     public RuntimeAnimatorController animator;
@@ -18,10 +17,12 @@ public class Collectable : ScriptableObject
         Debug.Log($"Collected {name}.\n");
     }
 
-    public void setType(string t)
+    public virtual void OnExecute()
     {
-        type = t;
+
     }
 
-    public bool equals(Collectable c) { return type == c.type; }
+    public bool equals(Collectable c) {
+        return name == c.name; 
+    }
 }

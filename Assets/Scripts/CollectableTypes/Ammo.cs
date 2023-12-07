@@ -9,15 +9,14 @@ using UnityEngine.UIElements;
 public class Ammo : Collectable
 {
     public int reloadAmount;
-
-    public Ammo()
-    {
-        setType("Ammo");
-    }
     public override void OnCollect()
     {
         AudioManager.instance.PlaySFX("Collect");
         base.OnCollect();
+    }
+
+    public override void OnExecute()
+    {
         Debug.Log($"Collected {reloadAmount} more bullets.\n");
 
         PlayerController.Instance.ReloadAmmo(reloadAmount);

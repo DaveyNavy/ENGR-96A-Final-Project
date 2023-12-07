@@ -30,20 +30,6 @@ public class InventorySlot
         stackSize = -1;
     }
 
-    public bool RoomLeftInStack(int amtToAdd, out int amtRemaining)
-    {
-        amtRemaining = ItemData.maxStackSize - amtToAdd;
-        return RoomLeftInStack(amtToAdd);
-    }
-
-    public bool RoomLeftInStack(int amtToAdd)
-    {
-        if (stackSize + amtToAdd <= itemData.maxStackSize)
-        {
-            return true;
-        }
-        return false;
-    }
     public void AddToStack(int amt)
     {
         stackSize += amt;

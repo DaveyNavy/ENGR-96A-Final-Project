@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
             health = 25;
             damageDealt = 5;
             aggroRange = 1;
-            speed = 0.0025f;
+            speed = 0.7f;
         }
     }
 
