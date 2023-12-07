@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 [CreateAssetMenu(fileName = "Collectable", menuName = "Collectables/BaseCollectable", order = 0)]
 public class Collectable : ScriptableObject
@@ -9,6 +10,8 @@ public class Collectable : ScriptableObject
     public new string name;
     public string type;
     public int maxStackSize = 999999;
+
+    public RuntimeAnimatorController animator;
     public virtual void OnCollect()
     {
         AudioManager.instance.PlaySFX("Collect");

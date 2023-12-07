@@ -6,8 +6,10 @@ public class CollectableObject : MonoBehaviour
 {
     [SerializeField] private Collectable collectable;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    void Start()
+    private Animator animator;
+    void Awake()
     {
+        animator = gameObject.GetComponent<Animator>();
         ReloadSprite();
     }
 
@@ -34,5 +36,15 @@ public class CollectableObject : MonoBehaviour
     private void ReloadSprite()
     {
         spriteRenderer.sprite = collectable.sprite;
+
+        if (collectable.animator == null) 
+        {
+            animator.runtimeAnimatorController = null;
+        }
+
+        else 
+        {
+            animator.runtimeAnimatorController = collectable.animator;
+        }
     }
 }

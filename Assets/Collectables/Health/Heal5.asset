@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadd56098647b454e98649d6b4d3cc0f, type: 3}
   m_Name: Heal5
   m_EditorClassIdentifier: 
-  sprite: {fileID: -473518653, guid: 3c737e2cf588167499b4b009e4150ab6, type: 3}
+  sprite: {fileID: -1632957053, guid: 31885fd61f6f0e34d80aad5a9029ef77, type: 3}
   name: heal_5
+  type: 
+  maxStackSize: 999999
+  animator: {fileID: 0}
   healAmount: 5
