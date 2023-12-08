@@ -26611,6 +26611,10 @@ PrefabInstance:
       propertyPath: loot.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6419352739111148390, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 68379e58423c01d4f94f9abc3cab2fd8, type: 2}
     - target: {fileID: 7259008679061894293, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
@@ -31983,6 +31987,10 @@ PrefabInstance:
       propertyPath: loot.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6419352739111148390, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 68379e58423c01d4f94f9abc3cab2fd8, type: 2}
     - target: {fileID: 7259008679061894293, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
       propertyPath: m_Name
       value: Enemy (12)
@@ -58232,6 +58240,10 @@ PrefabInstance:
       propertyPath: loot.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6419352739111148390, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 68379e58423c01d4f94f9abc3cab2fd8, type: 2}
     - target: {fileID: 7259008679061894293, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
@@ -58330,6 +58342,10 @@ PrefabInstance:
       propertyPath: loot.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6419352739111148390, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 68379e58423c01d4f94f9abc3cab2fd8, type: 2}
     - target: {fileID: 7259008679061894293, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
       propertyPath: m_Name
       value: Enemy (9)
@@ -58527,6 +58543,10 @@ PrefabInstance:
       propertyPath: loot.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6419352739111148390, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 68379e58423c01d4f94f9abc3cab2fd8, type: 2}
     - target: {fileID: 7259008679061894293, guid: 3a5e04e85c796764fb79911588591a6b, type: 3}
       propertyPath: m_Name
       value: Enemy (6)
