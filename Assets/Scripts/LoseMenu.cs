@@ -7,6 +7,6 @@ public class LoseMenu : MonoBehaviour
 {
     public void OnReturnButton()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }
